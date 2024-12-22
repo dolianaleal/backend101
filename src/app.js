@@ -49,6 +49,10 @@ app.get ('/products', (req, res) => {
     res.status(200).send(prodsFiltrados)
 })
 
+app.post('/products', (req, res) => {
+    let {nombre,marca,precio,stock} = req.body
+})
+
 
 // : hace referencia a un parametro
 app.get('/products/:pid', (req, res) => {
