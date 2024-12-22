@@ -3,6 +3,7 @@ import express from 'express'
 const PORT = 8080
 const app = express() //Cuando llame a app, se ejecuta Express
 
+//filtro por la marca enviada en los queries
 app.use(express.urlencoded({extended:true})) // Permite realizar peticiones mas complejas (req.query)
 
 const products = [
