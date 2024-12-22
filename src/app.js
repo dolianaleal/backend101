@@ -5,21 +5,21 @@ const app = express() //Cuando llame a app, se ejecuta Express
 
 const products = [
     {
-        id:1,
+        id: 1,
         nombre: "Product 1",
         marca: "Test 1",
-        precio: 1200 ,
+        precio: 1200,
         stock: 30
     },
     {
-        id:2,
+        id: 2,
         nombre: "Product 2",
         marca: "Test 2",
         precio: 2000,
         stock: 10
     },
     {
-        id:2,
+        id: 2,
         nombre: "Product 3",
         marca: "Test 3",
         precio: 1200,
@@ -40,8 +40,10 @@ app get('/saludar', (req, res) => {
 
 // : hace referencia a un parametro
 app.get('/products/:pid', (req, res) => {
-    const productId = req.params.pid
-    console.log(productId)
+    const productId = parseInt(req.params.pid)// Toda informacion que venga por el parametro, es un string
+    
+    const producto = products.find(prod => prod.id === + productId)
+
     res.send(`Producto con ID: ${productId}`)
 })
 
