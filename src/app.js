@@ -43,8 +43,10 @@ app get('/saludar', (req, res) => {
 
 app.get ('/products', (req, res) => {
     let {marca, precio} = req.query
+    //Filtro por la marca enviada en los queries
     let prodsFiltrados = products.filter(prod => prod.marca.toLowerCase === marca)
-    res.send(prodsFiltrados)
+
+    res.status(200).send(prodsFiltrados)
 })
 
 
@@ -55,9 +57,9 @@ app.get('/products/:pid', (req, res) => {
     const producto = products.find(prod => prod.id === + productId)
 
     if (producto) {
-        res.send(producto)
+        res.status(200).send(producto)
     } else {
-        res.send("El producto no existe")
+        res.status(404).send("El producto no existe")
     }
 
     res.send(`Producto con ID: ${productId}`)
