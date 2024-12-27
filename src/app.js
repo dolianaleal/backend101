@@ -28,7 +28,7 @@ app.get('/api/products', (req, res) => {
 app.get('/api/products/:pid', (req, res) => {
     const productId = (req.params.pid)// Toda informacion que venga por el parametro, es un string
 
-    const producto = products.find(prod => prod.id === productId)
+    const producto = products.find(prod => prod.id === + productId)
 
     if (producto) {
         res.status(200).send(producto)
@@ -52,7 +52,20 @@ app.post('/api/products', (req, res) => {
 })
 
 app.put('/api/products/:pid',(req,res) => {
+    const productId = req.params.pid
+    let {nombre, marca, precio, stock} = req.body
 
+    const indice = products.findIndex(prod => prod.id === productId)
+
+    if (indice != -1) {
+        products[indice].nombre = nombre
+        products[indice].marca = marca
+        products[indice].precio = precio
+        products[indice].stock = stock
+        res.status(200).send("Producto actualizado")
+    } else {
+        res.status(404).send("El producto no existe")
+    }
 })
 
 app.listen(PORT, () => {
