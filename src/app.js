@@ -26,9 +26,9 @@ app.get('/api/products', (req, res) => {
 
 // : hace referencia a un parametro
 app.get('/api/products/:pid', (req, res) => {
-    const productId = (req.params.pid)// Toda informacion que venga por el parametro, es un string
+    const productId = req.params.pid// Toda informacion que venga por el parametro, es un string
 
-    const producto = products.find(prod => prod.id === + productId)
+    const producto = products.find(prod => prod.id === productId)
 
     if (producto) {
         res.status(200).send(producto)
@@ -66,6 +66,21 @@ app.put('/api/products/:pid',(req,res) => {
     } else {
         res.status(404).send("El producto no existe")
     }
+})
+
+app.delete('/api/products/:pid', (req, res) => {
+
+    const productId = req.params.pid
+
+    const indice = products.findIndex(prod => prod.id ===  productId)
+
+    if (indice != -1) {
+        products.splice(indice, 1) //Eliminar producto dado su indice en el array
+        res.status(200).send("Producto Eliminado")
+    } else {
+        res.status(404).send("El producto no existe")
+    }
+
 })
 
 app.listen(PORT, () => {
