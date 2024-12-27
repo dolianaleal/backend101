@@ -15,23 +15,20 @@ app.get('/', (req, res) => {
     res.send("Hi, server")
 })
 
-app get('/saludar', (req, res) => {
-    res.send("Hola")
-})
-
-app.get('/products', (req, res) => {
-    let { marca, precio } = req.query
+app.get('/api/products', (req, res) => {
+    //let { marca, precio } = req.query
     //Filtro por la marca enviada en los queries
-    let prodsFiltrados = products.filter(prod => prod.marca.toLowerCase === marca)
+    //let prodsFiltrados = products.filter(prod => prod.marca.toLowerCase === marca)
 
-    res.status(200).send(prodsFiltrados)
+   // res.status(200).send(prodsFiltrados)
+   res.status(200).send(products)
 })
 
 // : hace referencia a un parametro
-app.get('/products/:pid', (req, res) => {
+app.get('/api/products/:pid', (req, res) => {
     const productId = (req.params.pid)// Toda informacion que venga por el parametro, es un string
 
-    const producto = products.find(prod => prod.id === + productId)
+    const producto = products.find(prod => prod.id === productId)
 
     if (producto) {
         res.status(200).send(producto)
@@ -40,11 +37,11 @@ app.get('/products/:pid', (req, res) => {
     }
 })
 
-app.post('/products', (req, res) => {
+app.post('/api/products', (req, res) => {
     let { nombre, marca, precio, stock } = req.body
 
     const newProduct = {
-        id: crypto.randomBytes(10).toString('hex')
+        id: crypto.randomBytes(10).toString('hex'),
         nombre: nombre,
         marca: marca,
         precio: precio,
@@ -52,6 +49,10 @@ app.post('/products', (req, res) => {
     }
     products.push(newProduct)
     res.status(201).send(`Producto creado con el id: ${newProduct.id}`)
+})
+
+app.put('/api/products/:pid',(req,res) => {
+
 })
 
 app.listen(PORT, () => {
