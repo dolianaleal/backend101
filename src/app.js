@@ -29,7 +29,7 @@ app.get('/products', (req, res) => {
 
 // : hace referencia a un parametro
 app.get('/products/:pid', (req, res) => {
-    const productId = parseInt(req.params.pid)// Toda informacion que venga por el parametro, es un string
+    const productId = (req.params.pid)// Toda informacion que venga por el parametro, es un string
 
     const producto = products.find(prod => prod.id === + productId)
 
@@ -38,14 +38,12 @@ app.get('/products/:pid', (req, res) => {
     } else {
         res.status(404).send("El producto no existe")
     }
-
-    res.send(`Producto con ID: ${productId}`)
 })
 
 app.post('/products', (req, res) => {
     let { nombre, marca, precio, stock } = req.body
 
-    const newProduct= {
+    const newProduct = {
         id: crypto.randomBytes(10).toString('hex')
         nombre: nombre,
         marca: marca,
