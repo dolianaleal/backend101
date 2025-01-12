@@ -1,9 +1,13 @@
-import exp from 'constants'
+/* import exp from 'constants'
 import express from 'express'
 import crypto from 'crypto'
 
+
+
 const PORT = 8080
 const app = express() //Cuando llame a app, se ejecuta Express
+
+
 
 app.use(express.json()) //Permite enviar y recibir JSON en las peticiones
 //filtro por la marca enviada en los queries
@@ -86,3 +90,38 @@ app.delete('/api/products/:pid', (req, res) => {
 app.listen(PORT, () => {
     console.log("Server on port: ", PORT)
 })
+
+*/
+
+const express = require('express')
+const logger = require('morgan')
+const productRouter = require('./routes/products.router.js')
+
+const app = express()
+const port = 8080
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use('/static', express.static(__dirname + 'public'));
+app.use(logger('dev'))
+
+
+const middleware = function (req, res, next) {
+    console.log('Time: ', Date.now())
+    req.username = 'John Doe'
+    next()
+}
+
+app.use(middleware)
+
+// rutas
+app.use('/api/products', productRouter)
+app.use ((err, req, res, next) => {
+    console.log(err.stack)
+    res.status(500).send('error de server')
+})
+
+// inicia el servidor
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+});
