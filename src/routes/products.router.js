@@ -9,12 +9,12 @@ const midd1 = function (req, res, next){
 }
 
 // http://localhost:8080/api/products/
-router.get('/', (req, res) => {
+router.get('/', midd1, (req, res) => {
     try{
         res.send(req.username)
     } catch (error){
         next (error)
-    }
+    } 
     
 });
 

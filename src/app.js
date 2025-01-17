@@ -92,7 +92,6 @@ app.listen(PORT, () => {
 })
 
 */
-
 const express = require('express')
 const logger = require('morgan')
 const productRouter = require('./routes/products.router.js')
@@ -113,6 +112,11 @@ const middleware = function (req, res, next) {
 }
 
 app.use(middleware)
+
+app.post ('/subirarchivo', uploader.single('myFile'), (req, res) => { //myFile : nombre del input donde se sube el archivo
+
+    res.send('archivo subido')
+})
 
 // rutas
 app.use('/api/products', productRouter)
