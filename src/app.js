@@ -3,6 +3,7 @@ const multer = require('multer');
 const logger = require('morgan');
 const path = require('path');
 const productRouter = require('./routes/products.router.js');
+const viewsRouter = require('./routes/views.router.js');
 const handlebars = require('express-handlebars');
 
 // Configuración de multer para subir el archivo
@@ -51,6 +52,8 @@ app.post('/subirarchivo', uploader.single('myFile'), (req, res) => {
     res.send('Archivo subido correctamente');
 });
 
+
+app.use('/', viewsRouter)
 // Rutas de productos
 app.use('/api/products', productRouter);
 
