@@ -29,20 +29,8 @@ app.use(logger('dev'));
 //Conf de motor de plantilla
 app.engine('handlebars', handlebars.engine())
 app.set ('view engine', 'handlebars')
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views')); // Establece la carpeta 'views' como la carpeta donde buscar las vistas
 
-
-// Ruta para servir el archivo index.html al acceder a la raíz
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'index.html'));
-});
-
-
-
-// Servir el archivo index.html con el formulario
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
 
 // Ruta para manejar la subida de archivos
 app.post('/subirarchivo', uploader.single('myFile'), (req, res) => {
