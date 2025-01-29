@@ -26,7 +26,10 @@ app.use('/static', express.static(path.join(__dirname, 'public'))); // Ruta estÃ
 app.use(logger('dev'));
 
 //Conf de motor de plantilla
-app.engine('handlebars')
+app.engine('handlebars', handlebars.engine())
+app.set ('view engine', 'handlebars')
+app.set ('views', './src/views')
+
 
 // Ruta para servir el archivo index.html al acceder a la raÃ­z
 app.get('/', (req, res) => {
