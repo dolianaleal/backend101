@@ -3,6 +3,7 @@ const multer = require('multer');
 const logger = require('morgan');
 const path = require('path');
 const productRouter = require('./routes/products.router.js');
+const handlebar = require ('express-handlebars')
 
 // Configuración de multer para subir el archivo
 const storage = multer.diskStorage({
@@ -23,6 +24,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/static', express.static(path.join(__dirname, 'public'))); // Ruta estática para imágenes
 app.use(logger('dev'));
+
+//Conf de motor de plantilla
+app.engine('handlebars')
 
 // Ruta para servir el archivo index.html al acceder a la raíz
 app.get('/', (req, res) => {
