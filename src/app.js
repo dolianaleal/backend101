@@ -3,7 +3,7 @@ const multer = require('multer');
 const logger = require('morgan');
 const path = require('path');
 const productRouter = require('./routes/products.router.js');
-const handlebar = require ('express-handlebars')
+const handlebars = require('express-handlebars');
 
 // Configuración de multer para subir el archivo
 const storage = multer.diskStorage({
@@ -28,7 +28,7 @@ app.use(logger('dev'));
 //Conf de motor de plantilla
 app.engine('handlebars', handlebars.engine())
 app.set ('view engine', 'handlebars')
-app.set ('views', './src/views')
+app.set('views', path.join(__dirname, 'views'));
 
 
 // Ruta para servir el archivo index.html al acceder a la raíz
