@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
 });
 
 
+
 // Servir el archivo index.html con el formulario
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
