@@ -27,8 +27,10 @@ app.use('/static', express.static(path.join(__dirname, 'public'))); // Ruta est√
 app.use(logger('dev'));
 
 //Conf de motor de plantilla
-app.engine('handlebars', handlebars.engine())
-app.set ('view engine', 'handlebars')
+app.engine('hbs', handlebars.engine( {
+    extname: '.hbs'
+}))
+app.set ('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'views')); // Establece la carpeta 'views' como la carpeta donde buscar las vistas
 
 

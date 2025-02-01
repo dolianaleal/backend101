@@ -1,0 +1,14 @@
+<main>
+    <h1>Hola mundo {{ user.name }} - {{last_name}} Handlebars</h1>
+    {{#if existProduct}}
+    <h2>Hay productos</h2>
+    <ul>
+        {{#each products}}
+        <li>Nombre del producto: {{title}} - precio {{price}}</li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p>No hay productos disponibles</p>
+
+    {{/if}}
+</main>
