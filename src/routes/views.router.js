@@ -18,11 +18,12 @@ const products = [
     {title: 'prod 6', price: 2000}
 ]
 
-    res.render('home', {
+    res.render('index', {
         user,
         products,
         existProduct: products.length!==0,
-        title: 'Home'
+        title: 'Home',
+        style: 'styles.css'
     })
     
     })
