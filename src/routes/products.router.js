@@ -1,6 +1,15 @@
 const { Router } = require('express')
+const ProductManagerFile = require ('../managers/productsManagerFiles.js')
 
 const router = Router();
+const {
+    getAll,
+    get,
+    create,
+    update,
+    remove: deleteAction // Renombrado de 'remove' a 'deleteAction'
+} = new ProductManagerFile();
+
 
 
 const midd1 = function (req, res, next){
@@ -9,13 +18,13 @@ const midd1 = function (req, res, next){
 }
 
 // http://localhost:8080/api/products/
-router.get('/', midd1, (req, res) => {
-    try{
-        res.send(req.username)
-    } catch (error){
-        next (error)
-    } 
-    
+router.get('/', midd1, async (req, res, next) => { // Añadido 'async' aquí
+    try {
+        const product = await get(); // 'await' correctamente
+        res.send(req.username);
+    } catch (error) {
+        next(error);
+    }
 });
 
 const authentication = (req, res, next) => {
@@ -32,7 +41,7 @@ router.put('/:pid', (req, res) => {
 });
 
 router.delete('/:pid', (req, res) => {
-    res.send('delete products')
+    res.send('remove products')
 });
 
 module.exports = router

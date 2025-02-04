@@ -23,8 +23,8 @@ const port = 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/static', express.static(path.join(__dirname, 'public'))); // Ruta estática para imágenes
-app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'public'))); 
+app.use(logger('dev'))
 
 //Conf de motor de plantilla
 app.engine('hbs', handlebars.engine( {
